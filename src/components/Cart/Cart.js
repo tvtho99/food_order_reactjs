@@ -1,11 +1,13 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 
 import CartContext from '../../store/cart-context'
 import Modal from '../UI/Modal'
 import CartItem from './CartItem'
+import OrderForm from './OderForm'
 import classes from './Cart.module.css'
 
 const Cart = (props) => {
+  const [showOderForm, setShowOderForm] = useState(false)
   const cartContext = useContext(CartContext)
 
   const totalPrice = `$${cartContext.totalPrice.toFixed(2)}`
@@ -34,19 +36,36 @@ const Cart = (props) => {
     </ul>
   )
 
+  const onShowOrderForm = () => {
+    setShowOderForm(true)
+  }
+
   return (
     <Modal onClose={props.onHideCart}>
-      {cartItems}
-      <div className={classes.total}>
-        <span>Total Amount</span>
-        <span>{totalPrice}</span>
-      </div>
-      <div className={classes.actions}>
-        <button className={classes['button--alt']} onClick={props.onHideCart}>
-          Close
-        </button>
-        {hasItems && <button className={classes.button}>Order</button>}
-      </div>
+      {showOderForm ? (
+        <OrderForm />
+      ) : (
+        <div>
+          {cartItems}
+          <div className={classes.total}>
+            <span>Total Price</span>
+            <span>{totalPrice}</span>
+          </div>
+          <div className={classes.actions}>
+            <button
+              className={classes['button--alt']}
+              onClick={props.onHideCart}
+            >
+              Close
+            </button>
+            {hasItems && (
+              <button className={classes.button} onClick={onShowOrderForm}>
+                Order
+              </button>
+            )}
+          </div>
+        </div>
+      )}
     </Modal>
   )
 }

@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #383838;
 }
 
 code {
@@ -16,8 +17,7 @@ code {
   width: 8px;
 }
 
-/* Track */
-::-webkit-scrollbar-track {
+Track ::-webkit-scrollbar-track {
   background: #f1f1f1;
 }
 
@@ -29,4 +29,14 @@ code {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Noto Sans JP', sans-serif;
 }

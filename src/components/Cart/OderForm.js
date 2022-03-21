@@ -1,0 +1,241 @@
+import { useContext, useState } from 'react'
+
+import useInput from '../../hooks/use-input'
+import CartContext from '../../store/cart-context'
+import classes from './OrderForm.module.css'
+
+const OrderForm = (props) => {
+  const [error, setError] = useState(null)
+  const [placeOrder, setPlaceOrder] = useState(false)
+  // get cart context
+  const cartContext = useContext(CartContext)
+  const totalPrice = `$${cartContext.totalPrice.toFixed(2)}`
+  const cartItems = (
+    <ul>
+      {cartContext.items.map((item) => (
+        <li key={item.id}>
+          {item.name} (${item.price}) x {item.amount}
+        </li>
+      ))}
+    </ul>
+  )
+
+  // use-input custom hook
+  const {
+    value: enteredFirstName,
+    isValid: enteredFirstNameIsValid,
+    hasError: firstNameInputHasError,
+    valueChangeHandler: firstNameChangeHandler,
+    inputBlurHandler: firstNameBlurHandler,
+    resetForm: resetFirstNameInput,
+  } = useInput((value) => value.trim() !== '')
+  const {
+    value: enteredLastName,
+    isValid: enteredLastNameIsValid,
+    hasError: lastNameInputHasError,
+    valueChangeHandler: lastNameChangeHandler,
+    inputBlurHandler: lastNameBlurHandler,
+    resetForm: resetLastNameInput,
+  } = useInput((value) => value.trim() !== '')
+  const {
+    value: enteredEmail,
+    isValid: enteredEmailIsValid,
+    hasError: emailInputHasError,
+    valueChangeHandler: emailChangeHandler,
+    inputBlurHandler: emailBlurHandler,
+    resetForm: resetEmailInput,
+  } = useInput((value) => value.includes('@'))
+  const {
+    value: enteredPhonenumber,
+    isValid: enteredPhonenumberIsValid,
+    hasError: phonenumberInputHasError,
+    valueChangeHandler: phonenumberChangeHandler,
+    inputBlurHandler: phonenumberBlurHandler,
+    resetForm: resetPhonenumberInput,
+  } = useInput((value) => value.trim() !== '')
+  const {
+    value: enteredAddress,
+    isValid: enteredAddressIsValid,
+    hasError: addressInputHasError,
+    valueChangeHandler: addressChangeHandler,
+    inputBlurHandler: addressBlurHandler,
+    resetForm: resetAddressInput,
+  } = useInput((value) => value.trim() !== '')
+  let formIsValid = false
+
+  if (
+    enteredFirstNameIsValid &&
+    enteredLastNameIsValid &&
+    enteredEmailIsValid &&
+    enteredAddressIsValid &&
+    enteredPhonenumberIsValid
+  ) {
+    formIsValid = true
+  }
+
+  const sendOders = async () => {
+    try {
+      const response = await fetch(
+        'https://react-http-requests-f261a-default-rtdb.asia-southeast1.firebasedatabase.app/orders.json',
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            firstName: enteredFirstName,
+            lastName: enteredLastName,
+            email: enteredEmail,
+            address: enteredAddress,
+            phonenumber: enteredPhonenumber,
+            items: cartContext.items,
+            totalPrice: totalPrice,
+          }),
+        }
+      )
+      if (!response.ok) {
+        throw new Error('Somthing went wrong!')
+      }
+    } catch (error) {
+      setError(error.message)
+    }
+  }
+
+  const submitFormHandler = (e) => {
+    e.preventDefault()
+    if (!formIsValid) {
+      return
+    }
+
+    sendOders()
+    setPlaceOrder(true)
+
+    resetFirstNameInput()
+    resetLastNameInput()
+    resetEmailInput()
+    resetAddressInput()
+    resetPhonenumberInput()
+  }
+
+  const firstNameInputClasses = firstNameInputHasError
+    ? `${classes['form-control']} ${classes.invalid}`
+    : classes['form-control']
+  const lastNameInputClasses = lastNameInputHasError
+    ? `${classes['form-control']} ${classes.invalid}`
+    : classes['form-control']
+  const emailInputClasses = emailInputHasError
+    ? `${classes['form-control']} ${classes.invalid}`
+    : classes['form-control']
+  const addressInputClasses = addressInputHasError
+    ? `${classes['form-control']} ${classes.invalid}`
+    : classes['form-control']
+  const phonenumberInputClasses = phonenumberInputHasError
+    ? `${classes['form-control']} ${classes.invalid}`
+    : classes['form-control']
+
+  let notification = placeOrder && !error && <p>Order Successfully!</p>
+  if (error) {
+    notification = error
+  }
+
+  return (
+    <>
+      {placeOrder ? (
+        notification
+      ) : (
+        <form onSubmit={submitFormHandler}>
+          <div style={{ overflowY: 'scroll', maxHeight: 440 }}>
+            <div className={classes['control-group']}>
+              <div className={firstNameInputClasses}>
+                <label htmlFor='name'>First Name</label>
+                <input
+                  type='text'
+                  id='name'
+                  value={enteredFirstName}
+                  onChange={firstNameChangeHandler}
+                  onBlur={firstNameBlurHandler}
+                />
+                {firstNameInputHasError && (
+                  <p className={classes['error-text']}>
+                    First Name must not be empty!
+                  </p>
+                )}
+              </div>
+              <div className={lastNameInputClasses}>
+                <label htmlFor='name'>Last Name</label>
+                <input
+                  type='text'
+                  id='name'
+                  value={enteredLastName}
+                  onChange={lastNameChangeHandler}
+                  onBlur={lastNameBlurHandler}
+                />
+                {lastNameInputHasError && (
+                  <p className={classes['error-text']}>
+                    Last Name must not be empty!
+                  </p>
+                )}
+              </div>
+            </div>
+            <div className={classes['control-group']}>
+              <div className={emailInputClasses}>
+                <label htmlFor='email'>Email</label>
+                <input
+                  type='email'
+                  id='email'
+                  value={enteredEmail}
+                  onChange={emailChangeHandler}
+                  onBlur={emailBlurHandler}
+                />
+                {emailInputHasError && (
+                  <p className={classes['error-text']}>
+                    Email must include "@" and not be empty!
+                  </p>
+                )}
+              </div>
+              <div className={phonenumberInputClasses}>
+                <label htmlFor='phonenumber'>Phone Number</label>
+                <input
+                  type='text'
+                  id='phonenumber'
+                  value={enteredPhonenumber}
+                  onChange={phonenumberChangeHandler}
+                  onBlur={phonenumberBlurHandler}
+                />
+                {emailInputHasError && (
+                  <p className={classes['error-text']}>
+                    Phone number must be entered!
+                  </p>
+                )}
+              </div>
+            </div>
+            <div className={addressInputClasses}>
+              <label htmlFor='address'>Address</label>
+              <input
+                type='text'
+                id='address'
+                value={enteredAddress}
+                onChange={addressChangeHandler}
+                onBlur={addressBlurHandler}
+              />
+              {emailInputHasError && (
+                <p className={classes['error-text']}>
+                  Adress must not be empty!
+                </p>
+              )}
+            </div>
+            <div className='order-details'>
+              <h3>Order Details:</h3>
+              <div>{cartItems}</div>
+              <h3>
+                Total Price: <span>{totalPrice}</span>
+              </h3>
+            </div>
+          </div>
+          <div className={classes['form-actions']}>
+            <button disabled={!formIsValid}>SUBMIT</button>
+          </div>
+        </form>
+      )}
+    </>
+  )
+}
+
+export default OrderForm
