@@ -11,8 +11,7 @@ const inputStateReducer = (state, action) => {
       return { value: action.value, isTouched: state.isTouched }
     case 'BLUR':
       return { ...state, isTouched: true }
-    case 'RESET':
-      return initalInputState
+
     default:
       return initalInputState
   }
@@ -32,17 +31,12 @@ const useInput = (validateValue) => {
     dispatch({ type: 'BLUR' })
   }
 
-  const resetForm = () => {
-    dispatch({ type: 'RESET' })
-  }
-
   return {
     value: inputState.value,
     isValid: valueIsValid,
     hasError,
     valueChangeHandler,
     inputBlurHandler,
-    resetForm,
   }
 }
 

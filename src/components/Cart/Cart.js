@@ -3,7 +3,7 @@ import { useContext, useState } from 'react'
 import CartContext from '../../store/cart-context'
 import Modal from '../UI/Modal'
 import CartItem from './CartItem'
-import OrderForm from './OderForm'
+import Checkout from './Checkout'
 import classes from './Cart.module.css'
 
 const Cart = (props) => {
@@ -36,14 +36,14 @@ const Cart = (props) => {
     </ul>
   )
 
-  const onShowOrderForm = () => {
+  const onShowCheckout = () => {
     setShowOderForm(true)
   }
 
   return (
     <Modal onClose={props.onHideCart}>
       {showOderForm ? (
-        <OrderForm />
+        <Checkout onHideCart={props.onHideCart} />
       ) : (
         <div>
           {cartItems}
@@ -59,7 +59,7 @@ const Cart = (props) => {
               Close
             </button>
             {hasItems && (
-              <button className={classes.button} onClick={onShowOrderForm}>
+              <button className={classes.button} onClick={onShowCheckout}>
                 Order
               </button>
             )}

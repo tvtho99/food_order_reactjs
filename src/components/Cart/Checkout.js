@@ -2,9 +2,9 @@ import { useContext, useState } from 'react'
 
 import useInput from '../../hooks/use-input'
 import CartContext from '../../store/cart-context'
-import classes from './OrderForm.module.css'
+import classes from './Checkout.module.css'
 
-const OrderForm = (props) => {
+const Checkout = (props) => {
   const [error, setError] = useState(null)
   const [placeOrder, setPlaceOrder] = useState(false)
   // get cart context
@@ -27,7 +27,6 @@ const OrderForm = (props) => {
     hasError: firstNameInputHasError,
     valueChangeHandler: firstNameChangeHandler,
     inputBlurHandler: firstNameBlurHandler,
-    resetForm: resetFirstNameInput,
   } = useInput((value) => value.trim() !== '')
   const {
     value: enteredLastName,
@@ -35,7 +34,6 @@ const OrderForm = (props) => {
     hasError: lastNameInputHasError,
     valueChangeHandler: lastNameChangeHandler,
     inputBlurHandler: lastNameBlurHandler,
-    resetForm: resetLastNameInput,
   } = useInput((value) => value.trim() !== '')
   const {
     value: enteredEmail,
@@ -43,7 +41,6 @@ const OrderForm = (props) => {
     hasError: emailInputHasError,
     valueChangeHandler: emailChangeHandler,
     inputBlurHandler: emailBlurHandler,
-    resetForm: resetEmailInput,
   } = useInput((value) => value.includes('@'))
   const {
     value: enteredPhonenumber,
@@ -51,7 +48,6 @@ const OrderForm = (props) => {
     hasError: phonenumberInputHasError,
     valueChangeHandler: phonenumberChangeHandler,
     inputBlurHandler: phonenumberBlurHandler,
-    resetForm: resetPhonenumberInput,
   } = useInput((value) => value.trim() !== '')
   const {
     value: enteredAddress,
@@ -59,7 +55,6 @@ const OrderForm = (props) => {
     hasError: addressInputHasError,
     valueChangeHandler: addressChangeHandler,
     inputBlurHandler: addressBlurHandler,
-    resetForm: resetAddressInput,
   } = useInput((value) => value.trim() !== '')
   let formIsValid = false
 
@@ -73,7 +68,7 @@ const OrderForm = (props) => {
     formIsValid = true
   }
 
-  const sendOders = async () => {
+  const submitOrder = async () => {
     try {
       const response = await fetch(
         'https://react-http-requests-f261a-default-rtdb.asia-southeast1.firebasedatabase.app/orders.json',
@@ -104,14 +99,10 @@ const OrderForm = (props) => {
       return
     }
 
-    sendOders()
+    submitOrder()
     setPlaceOrder(true)
 
-    resetFirstNameInput()
-    resetLastNameInput()
-    resetEmailInput()
-    resetAddressInput()
-    resetPhonenumberInput()
+    cartContext.clearCart()
   }
 
   const firstNameInputClasses = firstNameInputHasError
@@ -130,9 +121,24 @@ const OrderForm = (props) => {
     ? `${classes['form-control']} ${classes.invalid}`
     : classes['form-control']
 
-  let notification = placeOrder && !error && <p>Order Successfully!</p>
+  let notification
+
   if (error) {
     notification = error
+  } else {
+    notification = (
+      <>
+        <div className={classes['success-msg']}>
+          <i class='fa fa-check'></i>
+          Successfully sent the order!
+        </div>
+        <div className={classes['form-actions']}>
+          <button className={classes['button--alt']} onClick={props.onHideCart}>
+            Close
+          </button>
+        </div>
+      </>
+    )
   }
 
   return (
@@ -199,7 +205,7 @@ const OrderForm = (props) => {
                   onChange={phonenumberChangeHandler}
                   onBlur={phonenumberBlurHandler}
                 />
-                {emailInputHasError && (
+                {phonenumberInputHasError && (
                   <p className={classes['error-text']}>
                     Phone number must be entered!
                   </p>
@@ -215,7 +221,7 @@ const OrderForm = (props) => {
                 onChange={addressChangeHandler}
                 onBlur={addressBlurHandler}
               />
-              {emailInputHasError && (
+              {addressInputHasError && (
                 <p className={classes['error-text']}>
                   Adress must not be empty!
                 </p>
@@ -238,4 +244,4 @@ const OrderForm = (props) => {
   )
 }
 
-export default OrderForm
+export default Checkout

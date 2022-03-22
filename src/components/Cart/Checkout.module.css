@@ -1,3 +1,5 @@
+@import url('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css');
+
 .form-control {
   margin-bottom: 1rem;
 }
@@ -9,11 +11,13 @@
 
 .form-control label {
   font-weight: bold;
+  font-size: 1rem;
   margin-bottom: 0.5rem;
 }
 
 .form-control input,
 .form-control select {
+  height: 2rem;
   font: inherit;
   padding: 0.5rem;
   border-radius: 4px;
@@ -41,12 +45,13 @@
 
 button {
   font: inherit;
-  background-color: #cc1931;
-  color: white;
-  border: 1px solid black;
-  padding: 0.5rem 1.5rem;
-  border-radius: 4px;
+  font-weight: bold;
   cursor: pointer;
+  background-color: transparent;
+  border: 1px solid #8a2b06;
+  padding: 0.5rem 2rem;
+  border-radius: 25px;
+  margin-left: 1rem;
 }
 
 button:disabled,
@@ -60,8 +65,16 @@ button:disabled:active {
 
 button:hover,
 button:active {
-  background-color: #cc1931;
-  border-color: #fff;
+  background-color: #5a1a01;
+  border-color: #5a1a01;
+  color: white;
+}
+
+.button--alt:hover,
+.button--alt:active {
+  background-color: #5a1a01;
+  border-color: #5a1a01;
+  color: white;
 }
 
 .form-actions {
@@ -70,6 +83,14 @@ button:active {
 
 .form-actions button {
   margin-left: 1rem;
+}
+
+.success-msg {
+  text-align: right;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #270;
 }
 
 .invalid input {
