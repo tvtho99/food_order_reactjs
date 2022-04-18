@@ -43,7 +43,8 @@
   flex: 1;
 }
 
-button {
+.button,
+.button--alt {
   font: inherit;
   font-weight: bold;
   cursor: pointer;
@@ -51,20 +52,19 @@ button {
   border: 1px solid #8a2b06;
   padding: 0.5rem 2rem;
   border-radius: 25px;
-  margin-left: 1rem;
 }
 
-button:disabled,
-button:disabled:hover,
-button:disabled:active {
+.button:disabled,
+.button:disabled:hover,
+.button:disabled:active {
   background-color: #ccc;
   color: #706e6e;
   border-color: #ccc;
   cursor: not-allowed;
 }
 
-button:hover,
-button:active {
+.button:hover,
+.button:active {
   background-color: #5a1a01;
   border-color: #5a1a01;
   color: white;

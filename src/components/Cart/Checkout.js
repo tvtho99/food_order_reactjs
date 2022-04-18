@@ -236,7 +236,9 @@ const Checkout = (props) => {
             </div>
           </div>
           <div className={classes['form-actions']}>
-            <button disabled={!formIsValid}>SUBMIT</button>
+            <button className={classes.button} disabled={!formIsValid}>
+              SUBMIT
+            </button>
           </div>
         </form>
       )}

@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+.action {
+  font-family: 'Poppins', sans-serif;
+  margin-top: 6.5rem;
+  /* display: flex;
+  flex-direction: column; */
+  width: 3rem;
+}
+
+.action .profile {
+  position: absolute;
+  /* left: 10rem; */
+  cursor: pointer;
+}
+
+.action .profile img {
+  position: fixed;
+  top: 1.5rem;
+
+  /* margin-bottom: 5rem; */
+}
+
+.menu {
+  position: absolute;
+  top: 80px;
+  right: 10px;
+  padding: 10px 20px;
+  background: #fff;
+  width: 200px;
+  box-sizing: 0 5px 25px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.menu.active {
+  position: absolute;
+  top: 80px;
+  right: 10px;
+  padding: 10px 20px;
+  background: #fff;
+  width: 200px;
+  box-sizing: 0 5px 25px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  visibility: visible;
+  opacity: 1;
+}
+
+.action .menu::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  right: 2.7rem;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  transform: rotate(45deg);
+}
+
+.action .menu p {
+  color: #000;
+  text-align: center;
+  width: 100%;
+  font-size: 12px;
+  padding: 10px 0;
+  font-weight: 500;
+  color: #555;
+  line-height: 1.5em;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: wrap;
+}
+
+.action .menu ul {
+  padding-left: 0;
+}
+
+.action .menu ul li {
+  padding: 10px 0;
+  list-style: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+}
+
+.action .menu ul li img {
+  max-width: 20px;
+  margin-right: 10px;
+  opacity: 0.5;
+  transition: 0.5s;
+}
+
+.action .menu ul li:hover img {
+  opacity: 1;
+}
+
+.action .menu ul li a {
+  display: inline-block;
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  transition: 0.5s;
+  margin: 0;
+}
+
+.action .menu ul li:hover a {
+  color: #ff5d94;
+}
+
+.action .menu a {
+  color: #000;
+  font-weight: normal;
+  font-size: 1rem;
+}

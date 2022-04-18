@@ -1,11 +1,14 @@
-import React, { useRef } from 'react'
+import React, { useRef, useContext } from 'react'
 
 import Input from '../../UI/Input'
 import classes from './MealItemForm.module.css'
+import AuthContext from '../../../store/auth-context'
 
 const MealItemForm = (props) => {
   const [amountIsValid, setAmountIsValid] = React.useState(true)
   const amountInputRef = useRef()
+
+  const authContext = useContext(AuthContext)
 
   const submitHandler = (e) => {
     e.preventDefault()
@@ -39,7 +42,9 @@ const MealItemForm = (props) => {
           defaultValue: '1',
         }}
       />
-      <button type='submit'>+ Add</button>
+      <button type='submit' disabled={!authContext.isLoggedIn}>
+        Add
+      </button>
       {!amountIsValid && <p>Please enter a valid amount (1-5)</p>}
     </form>
   )

@@ -38,6 +38,13 @@
 
 .actions .button--alt {
   color: #8a2b06;
+  font: inherit;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid #8a2b06;
+  padding: 0.5rem 2rem;
+  border-radius: 25px;
 }
 
 .actions .button {
