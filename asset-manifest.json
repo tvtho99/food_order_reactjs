@@ -1,17 +1,19 @@
 {
   "files": {
-    "main.css": "./static/css/main.d4a5d516.css",
-    "main.js": "./static/js/main.31f3b03f.js",
+    "main.css": "./static/css/main.54a3d31a.css",
+    "main.js": "./static/js/main.1d82cc63.js",
     "static/js/787.ae0cd389.chunk.js": "./static/js/787.ae0cd389.chunk.js",
-    "static/media/meals.jpg": "./static/media/meals.2971f633fc1382581cbf.jpg",
-    "static/media/sushi.jpg": "./static/media/sushi.4645151b7c0100c68d63.jpg",
+    "static/media/wave.png": "./static/media/wave.40d1887aeaea7ecd70cb.png",
+    "static/media/Restaurant Background.jpg": "./static/media/Restaurant Background.a3b70ee866391babc86a.jpg",
+    "static/media/bg.svg": "./static/media/bg.6a6537711c52105628c05fe5c6ae9945.svg",
+    "static/media/avatar.svg": "./static/media/avatar.deb822fea1001b6d12ff18c31b23aa28.svg",
     "index.html": "./index.html",
-    "main.d4a5d516.css.map": "./static/css/main.d4a5d516.css.map",
-    "main.31f3b03f.js.map": "./static/js/main.31f3b03f.js.map",
+    "main.54a3d31a.css.map": "./static/css/main.54a3d31a.css.map",
+    "main.1d82cc63.js.map": "./static/js/main.1d82cc63.js.map",
     "787.ae0cd389.chunk.js.map": "./static/js/787.ae0cd389.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d4a5d516.css",
-    "static/js/main.31f3b03f.js"
+    "static/css/main.54a3d31a.css",
+    "static/js/main.1d82cc63.js"
   ]
 }
