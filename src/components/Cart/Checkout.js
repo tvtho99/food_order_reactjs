@@ -3,11 +3,14 @@ import { useContext, useState } from 'react'
 import useInput from '../../hooks/use-input'
 import AuthContext from '../../store/auth-context'
 import CartContext from '../../store/cart-context'
+import LoadingSpinner from '../UI/LoadingSpinner'
 import classes from './Checkout.module.css'
 
 const Checkout = (props) => {
   const [error, setError] = useState(null)
   const [placeOrder, setPlaceOrder] = useState(false)
+  const [loading, setLoading] = useState(false)
+
   // get cart context
   const cartContext = useContext(CartContext)
   // get auth context
@@ -65,6 +68,7 @@ const Checkout = (props) => {
 
   const submitOrder = async () => {
     try {
+      setLoading(true)
       const response = await fetch(
         'https://react-http-requests-f261a-default-rtdb.asia-southeast1.firebasedatabase.app/orders.json',
         {
@@ -84,7 +88,9 @@ const Checkout = (props) => {
       if (!response.ok) {
         throw new Error('Somthing went wrong!')
       }
+      setLoading(false)
     } catch (error) {
+      setLoading(false)
       setError(error.message)
     }
   }
@@ -131,6 +137,14 @@ const Checkout = (props) => {
           </button>
         </div>
       </>
+    )
+  }
+
+  if (loading) {
+    return (
+      <div style={{ textAlign: 'center' }}>
+        <LoadingSpinner />
+      </div>
     )
   }
 

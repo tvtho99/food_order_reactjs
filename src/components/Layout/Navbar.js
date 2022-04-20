@@ -10,7 +10,7 @@ const Navbar = () => {
       <header className={classes.header}>
         <Link to='/' className={classes.logo}>
           <span>
-            <i className='fa-solid fa-house'></i>
+            <i className='fa-solid fa-arrow-left-long'></i>
           </span>
         </Link>
       </header>

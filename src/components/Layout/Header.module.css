@@ -50,7 +50,7 @@
   text-decoration: none;
 }
 
-.nav a {
+/* .nav a {
   text-decoration: none;
   color: #192a56;
   background: #fff;
@@ -58,16 +58,33 @@
   font-size: 1.5rem;
   margin-left: 2rem;
   border-radius: 50%;
-}
+} */
 
 .login {
-  background: #fff;
   padding: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: bolder;
+  padding: 10px 24px;
+  border-width: 0;
+  background: #583bb6;
+  border-color: #583bb6;
+  color: #fff;
+  line-height: 1.67;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.188em;
+  cursor: pointer;
+  border: 0 solid rgba(0, 0, 0, 0);
+  border-radius: 50px;
+  outline: 0;
+  transition: all 0.3s ease 0s;
 }
 
 .login:hover {
-  background: #27ae60;
+  background: #4727ad;
   color: #fff;
+  transform: scale(1.1);
 }
 
 .nav button {

@@ -19,15 +19,17 @@
 }
 
 .no-order {
+  min-height: 30rem;
   text-align: center;
+  padding-top: 8rem;
 }
 
 .no-order a {
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: #19753f;
 }
 
 .notify {
-  font-weight: bolder;
+  font-weight: normal;
   font-size: 2rem;
 }

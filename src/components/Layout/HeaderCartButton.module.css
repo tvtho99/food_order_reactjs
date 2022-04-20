@@ -2,6 +2,16 @@
   margin-right: 1rem;
 }
 
+a.cart {
+  text-decoration: none;
+  color: #192a56;
+  background: #fff;
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-left: 2rem;
+  border-radius: 50%;
+}
+
 .button {
   font: inherit;
   border: none;

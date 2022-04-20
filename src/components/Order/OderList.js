@@ -54,8 +54,6 @@ const OderList = () => {
     getOrder()
   }, [getOrder, reload])
 
-  console.log(reload)
-
   let ordersList = (
     <div className={classes['no-order']}>
       <p className={classes.notify}>You have no orders yet!</p>
@@ -78,11 +76,22 @@ const OderList = () => {
     )
   }
 
+  if (loading) {
+    return (
+      <div style={{ textAlign: 'center', paddingTop: 150, paddingBottom: 150 }}>
+        <LoadingSpinner />
+      </div>
+    )
+  }
+
+  if (error) {
+    return <p className={classes.error}>{error} </p>
+  }
+
   return (
     <Card>
-      {loading && <LoadingSpinner />}
       <h1 className={classes.title}>Your Orders: {orders.length}</h1>
-      {error ? <p className={classes.error}>{error} </p> : ordersList}
+      {ordersList}
     </Card>
   )
 }

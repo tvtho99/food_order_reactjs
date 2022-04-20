@@ -3,6 +3,7 @@ import { useState, useCallback, useEffect } from 'react'
 import Card from '../UI/Card'
 import MealItem from './MealItem/MealItem'
 import classes from './AvailableMeals.module.css'
+import LoadingSpinner from '../UI/LoadingSpinner'
 
 const AvailableMeals = () => {
   const [meals, setMeals] = useState([])
@@ -47,7 +48,11 @@ const AvailableMeals = () => {
   }, [fecthMeals])
 
   if (isLoading) {
-    return <div className={classes.MealsLoading}>Loading...</div>
+    return (
+      <div className={classes.MealsLoading}>
+        <LoadingSpinner />
+      </div>
+    )
   }
   if (error) {
     return <div className={classes.MealsError}>{error}</div>

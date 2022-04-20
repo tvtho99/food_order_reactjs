@@ -25,7 +25,7 @@ const Header = (props) => {
 
           {!authContext.isLoggedIn && (
             <Link className={classes.login} to='/auth'>
-              Login
+              Login Now
             </Link>
           )}
         </div>

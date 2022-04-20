@@ -12,7 +12,6 @@ const Footer = () => {
           <p>Vietnam</p>
           <p>japan</p>
           <p>Singapore</p>
-          <p>USA</p>
         </div>
 
         <div className={classes.box}>
@@ -31,16 +30,24 @@ const Footer = () => {
 
         <div className={classes.box}>
           <h3>follow me</h3>
-          <a href='/'>facebook</a>
-          <a href='/'>twitter</a>
-          <a href='/'>github</a>
-          <a href='/'>linkedin</a>
+          <a href='https://github.com/tvtho99/food_order_reactjs'>
+            <i className='fa-brands fa-github'></i> github
+          </a>
+          <a href='/'>
+            <i className='fa-brands fa-facebook'></i> facebook
+          </a>
+          <a href='/'>
+            <i className='fa-brands fa-twitter'> </i> twitter
+          </a>
         </div>
       </div>
 
       <div className={classes.credit}>
         {' '}
-        copyright @ 2022 by <span>tvtho</span>{' '}
+        copyright @ 2022 by{' '}
+        <span>
+          <a href='https://github.com/tvtho99/food_order_reactjs'>tvtho</a>
+        </span>{' '}
       </div>
     </section>
   )

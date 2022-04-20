@@ -2,7 +2,7 @@ import { useState, useRef, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import wave from '../../assets/wave.png'
-import bg from '../../assets/bg.svg'
+import bg from '../../assets/meals.jpg'
 import avatar from '../../assets/avatar.svg'
 import classes from './AuthForm.module.css'
 import AuthContext from '../../store/auth-context'
@@ -105,9 +105,7 @@ const AuthForm = () => {
     <>
       <img className={classes.wave} src={wave} alt='wave' />
       <div className={classes.container}>
-        <div className={classes.img}>
-          <img src={bg} alt='background' />
-        </div>
+        <div className={classes.img}>{/* <img src={bg} alt='bg' /> */}</div>
         <div className={classes['login-content']}>
           <form onSubmit={submitFormHandler}>
             <img src={avatar} alt='avatar' />
