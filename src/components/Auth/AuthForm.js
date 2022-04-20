@@ -148,7 +148,14 @@ const AuthForm = () => {
               </button>
             )}
             {isLoading && (
-              <p style={{ fontWeight: 'bold', fontSize: 20 }}>
+              <p
+                style={{
+                  fontWeight: 'bold',
+                  fontSize: 20,
+                  paddingTop: 10,
+                  paddingBottom: 10,
+                }}
+              >
                 Sending request...
               </p>
             )}

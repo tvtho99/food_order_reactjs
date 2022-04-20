@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 
 import AuthContext from '../../store/auth-context'
@@ -30,7 +30,7 @@ const UserAction = () => {
           showMenu ? `${classes.active} ${classes.menu}` : classes.menu
         }
       >
-        <p>tvtho99@gmail.com</p>
+        <p>{authContext.email}</p>
         <ul>
           <li>
             <img src={edit} alt='edit' />

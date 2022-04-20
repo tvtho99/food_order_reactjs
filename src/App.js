@@ -16,9 +16,6 @@ function App() {
   const [cartIsShown, setCartIsShown] = useState(false)
   const authContext = useContext(AuthContext)
 
-  console.log(authContext.email)
-  console.log(authContext.isLoggedIn)
-
   const hideCartHandler = () => {
     setCartIsShown(false)
   }
