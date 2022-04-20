@@ -4,19 +4,19 @@ import { Link } from 'react-router-dom'
 import UserAction from './UserAction'
 import AuthContext from '../../store/auth-context'
 import HeaderCartButton from './HeaderCartButton'
-import mealsImage from '../../assets/meals.jpg'
+import mealsImage from '../../assets/Restaurant Background.jpg'
 import classes from './Header.module.css'
 
 const Header = (props) => {
   const authContext = useContext(AuthContext)
 
-  const logoutHandler = () => {
-    authContext.logout()
-  }
   return (
     <>
       <header className={classes.header}>
-        <h1>What2Eat</h1>
+        <i className='fas fa-utensils'></i>
+        <Link to='/' className={classes.logo}>
+          What2Eat
+        </Link>
         <div className={classes.nav}>
           {authContext.isLoggedIn && (
             <HeaderCartButton onClick={props.onShowCart} />
@@ -27,7 +27,7 @@ const Header = (props) => {
         </div>
       </header>
       <div className={classes['main-image']}>
-        <img src={mealsImage} alt='A table full of delicious food!' />
+        <img src={mealsImage} alt='test' />
       </div>
     </>
   )

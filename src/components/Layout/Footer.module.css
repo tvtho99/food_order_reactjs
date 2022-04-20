@@ -1,0 +1,57 @@
+:root {
+  --green: #27ae60;
+  --black: #192a56;
+  --light-color: #666;
+  --box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+}
+
+.footer {
+  padding: 0.4rem 9%;
+  background: #fff;
+  margin-top: 5rem;
+}
+
+.box-container {
+  display: flex;
+  justify-content: space-around;
+  text-transform: capitalize;
+}
+
+.footer .box-container .box h3 {
+  padding: 0.5rem 0;
+  font-size: 1.5rem;
+  color: var(--black);
+}
+
+.footer .box-container .box a {
+  display: block;
+  padding: 0.5rem 0;
+  font-size: 1rem;
+  color: var(--light-color);
+}
+
+.footer .box-container .box a:hover {
+  color: var(--green);
+  text-decoration: underline;
+}
+
+.footer .box-container .box p {
+  display: block;
+  padding: 0.5rem 0;
+  font-size: 1rem;
+}
+
+.footer .credit {
+  text-transform: capitalize;
+  text-align: center;
+  border-top: 0.1rem solid rgba(0, 0, 0, 0.1);
+  font-size: 1.2rem;
+  color: var(--black);
+  padding: 0.5rem;
+  padding-top: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.footer .credit span {
+  color: var(--green);
+}

@@ -106,3 +106,8 @@
 .error-text {
   color: #b40e0e;
 }
+
+.order-details ul {
+  padding-left: 2rem;
+  margin: 0.5rem;
+}

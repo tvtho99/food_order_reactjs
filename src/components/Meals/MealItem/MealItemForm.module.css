@@ -5,16 +5,16 @@
 .form button {
   font: inherit;
   cursor: pointer;
-  background-color: #8a2b06;
-  border: 1px solid #8a2b06;
+  background-color: #192a56;
+  border: 1px solid #192a56;
   color: white;
   padding: 0.25rem 2.5rem;
   border-radius: 20px;
-  font-weight: bold;
+  font-weight: normal;
 }
 
 .form button:hover,
 .form button:active {
-  background-color: #641e03;
-  border-color: #641e03;
+  background-color: #27ae60;
+  border-color: #27ae60;
 }

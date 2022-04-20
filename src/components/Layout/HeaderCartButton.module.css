@@ -1,3 +1,7 @@
+.cart {
+  margin-right: 1rem;
+}
+
 .button {
   font: inherit;
   border: none;
@@ -21,6 +25,13 @@
   height: 2rem;
   margin-right: 0.5rem;
   cursor: pointer;
+  color: #192a56;
+  transition: transform 0.25s linear;
+}
+
+.button:hover .icon {
+  transform: rotate(360deg);
+  color: #27ae60;
 }
 
 .badge {
@@ -31,13 +42,13 @@
   /* margin-left: 1rem; */
   font-weight: bold;
   font-size: small;
-  right: 1rem;
-  bottom: 1rem;
+  right: 1.2rem;
+  bottom: 0.7rem;
 }
 
 .button:hover .badge,
 .button:active .badge {
-  background-color: #92320c;
+  background-color: #666;
 }
 
 .bump {

@@ -1,6 +1,9 @@
 import { useState, useRef, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 
+import wave from '../../assets/wave.png'
+import bg from '../../assets/bg.svg'
+import avatar from '../../assets/avatar.svg'
 import classes from './AuthForm.module.css'
 import AuthContext from '../../store/auth-context'
 
@@ -64,7 +67,11 @@ const AuthForm = () => {
         const expirationTime = new Date(
           new Date().getTime() + +data.expiresIn * 1000
         )
-        authContext.login(data.idToken, expirationTime.toISOString())
+        authContext.login(
+          data.idToken,
+          data.email,
+          expirationTime.toISOString()
+        )
 
         history.replace('/')
       })
@@ -74,37 +81,61 @@ const AuthForm = () => {
   }
 
   return (
-    <section className={classes.auth}>
-      <h1>{isLogin ? 'Login' : 'Sign Up'}</h1>
-      <form onSubmit={submitFormHandler}>
-        <div className={classes.control}>
-          <label htmlFor='email'>Your Email</label>
-          <input type='email' id='email' ref={emailInputRef} required />
+    <>
+      <img className={classes.wave} src={wave} alt='wave' />
+      <div className={classes.container}>
+        <div className={classes.img}>
+          <img src={bg} alt='background' />
         </div>
-        <div className={classes.control}>
-          <label htmlFor='password'>Your Password</label>
-          <input
-            type='password'
-            id='password'
-            ref={passwordInputRef}
-            required
-          />
+        <div className={classes['login-content']}>
+          <form onSubmit={submitFormHandler}>
+            <img src={avatar} alt='avatar' />
+            <h2 className={classes.title}>Welcome</h2>
+            <div className={`${classes['input-div']} ${classes.one}`}>
+              <div className={classes.i}>
+                <i className='fas fa-user'></i>
+              </div>
+              <div className={classes.div}>
+                <h5>Email</h5>
+                <input
+                  type='email'
+                  id='email'
+                  className={classes.input}
+                  ref={emailInputRef}
+                />
+              </div>
+            </div>
+            <div className={`${classes['input-div']} ${classes.pass}`}>
+              <div className={classes.i}>
+                <i className='fas fa-lock'></i>
+              </div>
+              <div className={classes.div}>
+                <h5>Password</h5>
+                <input
+                  type='password'
+                  id='password'
+                  className={classes.input}
+                  ref={passwordInputRef}
+                />
+              </div>
+            </div>
+            {!isLoading && (
+              <button className={classes.btn}>
+                {isLogin ? 'Login' : 'Create Account'}{' '}
+              </button>
+            )}
+            {isLoading && <p>Sending request...</p>}
+            <button
+              type='button'
+              className={classes.toggle}
+              onClick={switchAuthModeHandler}
+            >
+              {isLogin ? 'Create new account' : 'Login with existing account'}
+            </button>
+          </form>
         </div>
-        <div className={classes.actions}>
-          {!isLoading && (
-            <button>{isLogin ? 'Login' : 'Create Account'}</button>
-          )}
-          {isLoading && <p>Sending request...</p>}
-          <button
-            type='button'
-            className={classes.toggle}
-            onClick={switchAuthModeHandler}
-          >
-            {isLogin ? 'Create new account' : 'Login with existing account'}
-          </button>
-        </div>
-      </form>
-    </section>
+      </div>
+    </>
   )
 }
 

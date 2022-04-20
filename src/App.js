@@ -1,27 +1,31 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
-import { useHistory } from 'react-router-dom'
 
 import Header from './components/Layout/Header'
+import Footer from './components/Layout/Footer'
 import Meals from './components/Meals/Meals'
 import Cart from './components/Cart/Cart'
+import Navbar from './components/Layout/Navbar'
 import CartProvider from './store/CartProvider'
 import AuthForm from './components/Auth/AuthForm'
 import Orders from './pages/Oders'
 import Profile from './pages/Profile'
+import AuthContext from './store/auth-context'
 
 function App() {
   const [cartIsShown, setCartIsShown] = useState(false)
+  const authContext = useContext(AuthContext)
 
-  const history = useHistory()
-
-  const showCartHandler = () => {
-    setCartIsShown(true)
-  }
+  console.log(authContext.email)
 
   const hideCartHandler = () => {
     setCartIsShown(false)
-    history.replace('/home')
+  }
+
+  const showCartHandler = () => {
+    if (cartIsShown) {
+      hideCartHandler()
+    } else setCartIsShown(true)
   }
 
   return (
@@ -30,24 +34,44 @@ function App() {
         <Route path='/' exact>
           <Redirect to='/home' />
         </Route>
+
         <Route path='/home' exact>
           <Header onShowCart={showCartHandler} />
           <main>
             <Meals />
           </main>
+          <Footer />
         </Route>
+
         <Route path='/auth'>
           <AuthForm />
         </Route>
+
         <Route path='/cart'>
           <Header onShowCart={showCartHandler} />
-          {cartIsShown && <Cart onHideCart={hideCartHandler} />}
+          {!authContext.isLoggedIn && <Redirect to='/auth' />}
+          {cartIsShown ? (
+            <Cart onHideCart={hideCartHandler} />
+          ) : (
+            <Redirect to='/home' />
+          )}
+          <Footer />
         </Route>
+
         <Route path='/orders'>
-          <Orders />
+          <Navbar />
+          {authContext.isLoggedIn ? <Orders /> : <Redirect to='/auth' />}
+          <Footer />
         </Route>
+
         <Route path='/profile'>
-          <Profile />
+          <Navbar />
+          {authContext.isLoggedIn ? <Profile /> : <Redirect to='/auth' />}
+          <Footer />
+        </Route>
+
+        <Route path='*'>
+          <Redirect to='/home' />
         </Route>
       </Switch>
     </CartProvider>

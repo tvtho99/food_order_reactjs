@@ -31,6 +31,7 @@ const AvailableMeals = () => {
           name={meal.name}
           description={meal.description}
           price={meal.price}
+          image={meal.image}
         />
       ))
       setMeals(mealItemList)

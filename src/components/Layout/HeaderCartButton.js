@@ -30,7 +30,7 @@ const HeaderCartButton = (props) => {
   }, [items])
 
   return (
-    <Link to='/cart'>
+    <Link to='/cart' className={classes.cart}>
       <button className={btnClasses} onClick={props.onClick}>
         <span className={classes.icon}>
           <CartIcon />

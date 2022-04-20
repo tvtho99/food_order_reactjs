@@ -17,32 +17,47 @@
 .action .profile img {
   position: fixed;
   top: 1.5rem;
+  border-radius: 50%;
+}
 
-  /* margin-bottom: 5rem; */
+.profile img:hover,
+.profile img:active {
+  background-color: #63cc8f;
+  animation: swing 0.5s ease-out forwards;
+}
+
+@keyframes swing {
+  0% {
+    transform: rotate(0deg);
+  }
+  40% {
+    transform: rotate(10deg);
+  }
+  60% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 .menu {
-  position: absolute;
-  top: 80px;
-  right: 10px;
-  padding: 10px 20px;
-  background: #fff;
-  width: 200px;
-  box-sizing: 0 5px 25px rgba(0, 0, 0, 0.1);
-  border-radius: 15px;
   visibility: hidden;
   opacity: 0;
 }
 
 .menu.active {
   position: absolute;
-  top: 80px;
+  top: 90px;
   right: 10px;
   padding: 10px 20px;
   background: #fff;
   width: 200px;
   box-sizing: 0 5px 25px rgba(0, 0, 0, 0.1);
+  border: 3px solid rgba(0, 0, 0, 0.5);
   border-radius: 15px;
+  z-index: 1000;
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
   visibility: visible;
   opacity: 1;
 }
@@ -62,10 +77,9 @@
   color: #000;
   text-align: center;
   width: 100%;
-  font-size: 12px;
+  font-size: 15px;
   padding: 10px 0;
   font-weight: 500;
-  color: #555;
   line-height: 1.5em;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -98,7 +112,7 @@
 .action .menu ul li a {
   display: inline-block;
   text-decoration: none;
-  color: #555;
+  color: #000;
   font-weight: 500;
   transition: 0.5s;
   margin: 0;

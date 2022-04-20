@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react'
 
 import useInput from '../../hooks/use-input'
+import AuthContext from '../../store/auth-context'
 import CartContext from '../../store/cart-context'
 import classes from './Checkout.module.css'
 
@@ -9,6 +10,8 @@ const Checkout = (props) => {
   const [placeOrder, setPlaceOrder] = useState(false)
   // get cart context
   const cartContext = useContext(CartContext)
+  // get auth context
+  const authContext = useContext(AuthContext)
   const totalPrice = `$${cartContext.totalPrice.toFixed(2)}`
   const cartItems = (
     <ul>
@@ -36,13 +39,6 @@ const Checkout = (props) => {
     inputBlurHandler: lastNameBlurHandler,
   } = useInput((value) => value.trim() !== '')
   const {
-    value: enteredEmail,
-    isValid: enteredEmailIsValid,
-    hasError: emailInputHasError,
-    valueChangeHandler: emailChangeHandler,
-    inputBlurHandler: emailBlurHandler,
-  } = useInput((value) => value.includes('@'))
-  const {
     value: enteredPhonenumber,
     isValid: enteredPhonenumberIsValid,
     hasError: phonenumberInputHasError,
@@ -61,7 +57,6 @@ const Checkout = (props) => {
   if (
     enteredFirstNameIsValid &&
     enteredLastNameIsValid &&
-    enteredEmailIsValid &&
     enteredAddressIsValid &&
     enteredPhonenumberIsValid
   ) {
@@ -77,7 +72,7 @@ const Checkout = (props) => {
           body: JSON.stringify({
             firstName: enteredFirstName,
             lastName: enteredLastName,
-            email: enteredEmail,
+            email: authContext.email,
             address: enteredAddress,
             phonenumber: enteredPhonenumber,
             items: cartContext.items,
@@ -111,9 +106,6 @@ const Checkout = (props) => {
   const lastNameInputClasses = lastNameInputHasError
     ? `${classes['form-control']} ${classes.invalid}`
     : classes['form-control']
-  const emailInputClasses = emailInputHasError
-    ? `${classes['form-control']} ${classes.invalid}`
-    : classes['form-control']
   const addressInputClasses = addressInputHasError
     ? `${classes['form-control']} ${classes.invalid}`
     : classes['form-control']
@@ -129,7 +121,7 @@ const Checkout = (props) => {
     notification = (
       <>
         <div className={classes['success-msg']}>
-          <i class='fa fa-check'></i>
+          <i className='fa fa-check'></i>
           Successfully sent the order!
         </div>
         <div className={classes['form-actions']}>
@@ -181,21 +173,6 @@ const Checkout = (props) => {
               </div>
             </div>
             <div className={classes['control-group']}>
-              <div className={emailInputClasses}>
-                <label htmlFor='email'>Email</label>
-                <input
-                  type='email'
-                  id='email'
-                  value={enteredEmail}
-                  onChange={emailChangeHandler}
-                  onBlur={emailBlurHandler}
-                />
-                {emailInputHasError && (
-                  <p className={classes['error-text']}>
-                    Email must include "@" and not be empty!
-                  </p>
-                )}
-              </div>
               <div className={phonenumberInputClasses}>
                 <label htmlFor='phonenumber'>Phone Number</label>
                 <input
@@ -227,7 +204,7 @@ const Checkout = (props) => {
                 </p>
               )}
             </div>
-            <div className='order-details'>
+            <div className={classes['order-details']}>
               <h3>Order Details:</h3>
               <div>{cartItems}</div>
               <h3>

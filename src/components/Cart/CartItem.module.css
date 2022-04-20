@@ -53,8 +53,8 @@
   border-radius: 6px;
   background-color: transparent;
   cursor: pointer;
-  margin-left: 1rem;
   margin: 0.25rem;
+  width: 2.5rem;
 }
 
 .cart-item button:hover,

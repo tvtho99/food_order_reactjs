@@ -3,7 +3,6 @@ import React, { useContext } from 'react'
 import CartContext from '../../../store/cart-context'
 import MealItemForm from './MealItemForm.js'
 import classes from './MealItem.module.css'
-import sushiImg from '../../../assets/sushi.jpg'
 
 const MealItem = (props) => {
   const cartContext = useContext(CartContext)
@@ -21,7 +20,7 @@ const MealItem = (props) => {
     <li className={classes.meal}>
       <div className={classes['item-info']}>
         <div>
-          <img src={sushiImg} alt='item' />
+          <img src={props.image} alt='item' />
         </div>
         <div>
           <h3>{props.name}</h3>

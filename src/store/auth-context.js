@@ -4,6 +4,7 @@ let logoutTimer
 
 const AuthContext = React.createContext({
   token: '',
+  email: '',
   isLoggedIn: false,
   login: (token) => {},
   logout: () => {},
@@ -18,7 +19,8 @@ const calculateRemainingTime = (expirationTime) => {
   return remainingDuration
 }
 
-const retrieveStoredToken = () => {
+const retrieveStoredData = () => {
+  const storedEmail = localStorage.getItem('email')
   const storedToken = localStorage.getItem('token')
   const storedExpirationTime = localStorage.getItem('expirationTime')
 
@@ -30,22 +32,28 @@ const retrieveStoredToken = () => {
     return null
   }
 
-  return { token: storedToken, duration: remainingDuration }
+  return { email: storedEmail, token: storedToken, duration: remainingDuration }
 }
 
 export const AuthContextProvider = (props) => {
-  const tokenData = retrieveStoredToken()
+  const tokenData = retrieveStoredData()
+
   let initialToken
+  let initialEmail
   if (tokenData) {
+    initialEmail = tokenData.email
     initialToken = tokenData.token
   }
+  const [email, setEmail] = useState(initialEmail)
   const [token, setToken] = useState(initialToken)
 
   const useIsLoggedIn = !!token
 
   const logoutHandler = useCallback(() => {
     setToken(null)
+    setEmail(null)
 
+    localStorage.removeItem('email')
     localStorage.removeItem('token')
     localStorage.removeItem('expirationTime')
 
@@ -54,8 +62,10 @@ export const AuthContextProvider = (props) => {
     }
   }, [])
 
-  const loginHandler = (token, expirationTime) => {
+  const loginHandler = (token, email, expirationTime) => {
     setToken(token)
+    setEmail(email)
+    localStorage.setItem('email', email)
     localStorage.setItem('token', token)
     localStorage.setItem('expirationTime', expirationTime)
 
@@ -63,12 +73,15 @@ export const AuthContextProvider = (props) => {
     logoutTimer = setTimeout(logoutHandler, remainingTime)
   }
 
-  // useEffect(() => {
-  //   logoutTimer = setTimeout(logoutHandler, tokenData.duration)
-  // }, [tokenData, logoutHandler])
+  useEffect(() => {
+    if (tokenData) {
+      logoutTimer = setTimeout(logoutHandler, tokenData.duration)
+    }
+  }, [tokenData, logoutHandler])
 
   const contextValue = {
     token,
+    email,
     isLoggedIn: useIsLoggedIn,
     login: loginHandler,
     logout: logoutHandler,
