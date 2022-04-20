@@ -9,7 +9,7 @@ import { AuthContextProvider } from './store/auth-context'
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <AuthContextProvider>
-    <BrowserRouter>
+    <BrowserRouter basename='/food_order_reactjs'>
       <React.StrictMode>
         <App />
       </React.StrictMode>
