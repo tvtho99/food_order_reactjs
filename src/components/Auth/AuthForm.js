@@ -18,6 +18,13 @@ const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true)
   const [isLoading, setIsLoading] = useState(false)
 
+  const [emailClasses, setEmailClasses] = useState(
+    `${classes['input-div']} ${classes.one}`
+  )
+  const [passClasses, setPassClasses] = useState(
+    `${classes['input-div']} ${classes.pass}`
+  )
+
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState)
   }
@@ -80,6 +87,20 @@ const AuthForm = () => {
       })
   }
 
+  const emailFocusHandler = () => {
+    setEmailClasses(`${classes['input-div']} ${classes.one} ${classes.focus}`)
+  }
+  const emailBlurHandler = () => {
+    setEmailClasses(`${classes['input-div']} ${classes.one}`)
+  }
+
+  const passFocusHandler = () => {
+    setPassClasses(`${classes['input-div']} ${classes.pass} ${classes.focus}`)
+  }
+  const passBlurHandler = () => {
+    setPassClasses(`${classes['input-div']} ${classes.pass}`)
+  }
+
   return (
     <>
       <img className={classes.wave} src={wave} alt='wave' />
@@ -91,7 +112,7 @@ const AuthForm = () => {
           <form onSubmit={submitFormHandler}>
             <img src={avatar} alt='avatar' />
             <h2 className={classes.title}>Welcome</h2>
-            <div className={`${classes['input-div']} ${classes.one}`}>
+            <div className={emailClasses}>
               <div className={classes.i}>
                 <i className='fas fa-user'></i>
               </div>
@@ -102,10 +123,12 @@ const AuthForm = () => {
                   id='email'
                   className={classes.input}
                   ref={emailInputRef}
+                  onFocus={emailFocusHandler}
+                  onBlur={emailBlurHandler}
                 />
               </div>
             </div>
-            <div className={`${classes['input-div']} ${classes.pass}`}>
+            <div className={passClasses}>
               <div className={classes.i}>
                 <i className='fas fa-lock'></i>
               </div>
@@ -116,6 +139,8 @@ const AuthForm = () => {
                   id='password'
                   className={classes.input}
                   ref={passwordInputRef}
+                  onFocus={passFocusHandler}
+                  onBlur={passBlurHandler}
                 />
               </div>
             </div>
@@ -124,7 +149,11 @@ const AuthForm = () => {
                 {isLogin ? 'Login' : 'Create Account'}{' '}
               </button>
             )}
-            {isLoading && <p>Sending request...</p>}
+            {isLoading && (
+              <p style={{ fontWeight: 'bold', fontSize: 20 }}>
+                Sending request...
+              </p>
+            )}
             <button
               type='button'
               className={classes.toggle}

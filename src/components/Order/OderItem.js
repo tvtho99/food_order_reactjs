@@ -22,15 +22,19 @@ const OderItem = ({ order, orderChange }) => {
   }
 
   return (
-    <>
+    <div className={classes.item}>
       <li key={order.id}>
         <h3>
-          {order.lastName} {order.firstName} / Phone: {order.phonenumber} / Add:{' '}
-          {order.address}
+          Fullname:{' '}
+          <span className={classes.info}>
+            {order.lastName} {order.firstName}
+          </span>{' '}
+          / Phone: <span className={classes.info}>{order.phonenumber}</span> /
+          Add: <span className={classes.info}>{order.address}</span>
         </h3>
 
         <h3>Items: </h3>
-        <ul>
+        <ul className={classes.dish}>
           {order.items.map((item) => {
             return (
               <li key={item.id}>
@@ -39,7 +43,12 @@ const OderItem = ({ order, orderChange }) => {
             )
           })}
         </ul>
-        <h3>Total Price: {order.totalPrice}</h3>
+        <h3>
+          Created At: <span className={classes.info}> {order.date}</span>
+        </h3>
+        <h3>
+          Total Price: <span className={classes.info}>{order.totalPrice}</span>
+        </h3>
       </li>
       <button
         className={`${classes.button} ${classes.primary} ${classes.delete}`}
@@ -47,7 +56,7 @@ const OderItem = ({ order, orderChange }) => {
       >
         Delete
       </button>
-    </>
+    </div>
   )
 }
 

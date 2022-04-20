@@ -18,3 +18,10 @@
   background-color: #27ae60;
   border-color: #27ae60;
 }
+
+.form button:disabled {
+  background-color: #eee;
+  border-color: #eee;
+  color: #ccc;
+  cursor: auto;
+}

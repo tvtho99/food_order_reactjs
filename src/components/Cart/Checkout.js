@@ -75,6 +75,7 @@ const Checkout = (props) => {
             email: authContext.email,
             address: enteredAddress,
             phonenumber: enteredPhonenumber,
+            date: new Date().toLocaleString(),
             items: cartContext.items,
             totalPrice: totalPrice,
           }),

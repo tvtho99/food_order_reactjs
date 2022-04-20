@@ -53,12 +53,21 @@
 .nav a {
   text-decoration: none;
   color: #192a56;
+  background: #fff;
   font-weight: bold;
-  font-size: larger;
+  font-size: 1.5rem;
   margin-left: 2rem;
   border-radius: 50%;
+}
+
+.login {
   background: #fff;
-  width: fit-content;
+  padding: 0.5rem;
+}
+
+.login:hover {
+  background: #27ae60;
+  color: #fff;
 }
 
 .nav button {

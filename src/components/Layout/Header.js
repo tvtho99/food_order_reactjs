@@ -23,7 +23,11 @@ const Header = (props) => {
           )}
           {authContext.isLoggedIn && <UserAction />}
 
-          {!authContext.isLoggedIn && <Link to='/auth'>Login</Link>}
+          {!authContext.isLoggedIn && (
+            <Link className={classes.login} to='/auth'>
+              Login
+            </Link>
+          )}
         </div>
       </header>
       <div className={classes['main-image']}>

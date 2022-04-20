@@ -1,4 +1,27 @@
+.item {
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #000;
+  margin-bottom: 1.5rem;
+}
+
+.item h3 {
+  margin-top: 0.5rem;
+}
+
+.item li {
+  margin-left: 2rem;
+}
+
+.dish li {
+  margin-left: 3rem;
+}
+
+.info {
+  color: red;
+}
+
 .button {
+  margin: 1rem 0 0 2rem;
   font-family: 'Open Sans';
   font-size: 16px;
   font-weight: 400;
