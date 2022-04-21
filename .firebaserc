@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "react-http-requests-f261a"
-  }
+    "default": "react-food-order-app-deploy"
+  },
+  "targets": {}
 }

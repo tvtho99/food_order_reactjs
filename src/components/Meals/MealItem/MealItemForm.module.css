@@ -11,12 +11,14 @@
   padding: 0.25rem 2.5rem;
   border-radius: 20px;
   font-weight: normal;
+  transition: all 0.2s ease-in-out;
 }
 
 .form button:hover,
 .form button:active {
   background-color: #27ae60;
   border-color: #27ae60;
+  transform: scale(1.05);
 }
 
 .form button:disabled {

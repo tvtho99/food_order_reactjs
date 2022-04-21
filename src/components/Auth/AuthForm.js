@@ -6,6 +6,7 @@ import bg from '../../assets/meals.jpg'
 import avatar from '../../assets/avatar.svg'
 import classes from './AuthForm.module.css'
 import AuthContext from '../../store/auth-context'
+import { Link } from 'react-router-dom'
 
 const AuthForm = () => {
   const history = useHistory()
@@ -77,7 +78,7 @@ const AuthForm = () => {
         authContext.login(
           data.idToken,
           data.email,
-          expirationTime.toISOString()
+          expirationTime.toLocaleString()
         )
 
         history.replace('/')
@@ -159,6 +160,7 @@ const AuthForm = () => {
                 Sending request...
               </p>
             )}
+            <Link to='/auth/resetPassword'>Forgot Password?</Link>
             <button
               type='button'
               className={classes.toggle}

@@ -6,10 +6,13 @@ import Footer from './components/Layout/Footer'
 import Meals from './components/Meals/Meals'
 import Cart from './components/Cart/Cart'
 import Navbar from './components/Layout/Navbar'
-import CartProvider from './store/CartProvider'
 import AuthForm from './components/Auth/AuthForm'
+
 import Orders from './pages/Oders'
 import Profile from './pages/Profile'
+import NotFound from './pages/NotFound/NotFound'
+
+import { CartProvider } from './store/cart-context'
 import AuthContext from './store/auth-context'
 
 function App() {
@@ -41,11 +44,11 @@ function App() {
           <Footer />
         </Route>
 
-        <Route path='/auth'>
+        <Route path='/auth' exact>
           <AuthForm />
         </Route>
 
-        <Route path='/cart'>
+        <Route path='/cart' exact>
           <Header onShowCart={showCartHandler} />
           {!authContext.isLoggedIn && <Redirect to='/auth' />}
           {cartIsShown ? (
@@ -53,23 +56,22 @@ function App() {
           ) : (
             <Redirect to='/home' />
           )}
-          <Footer />
         </Route>
 
-        <Route path='/orders'>
+        <Route path='/orders' exact>
           <Navbar />
           {authContext.isLoggedIn ? <Orders /> : <Redirect to='/auth' />}
           <Footer />
         </Route>
 
-        <Route path='/profile'>
+        <Route path='/profile' exact>
           <Navbar />
           {authContext.isLoggedIn ? <Profile /> : <Redirect to='/auth' />}
           <Footer />
         </Route>
 
         <Route path='*'>
-          <Redirect to='/home' />
+          <NotFound />
         </Route>
       </Switch>
     </CartProvider>

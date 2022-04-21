@@ -26,7 +26,7 @@ const retrieveStoredData = () => {
 
   const remainingDuration = calculateRemainingTime(storedExpirationTime)
 
-  if (remainingDuration < 60000) {
+  if (remainingDuration < 1000) {
     localStorage.removeItem('token')
     localStorage.removeItem('expirationTime')
     return null
@@ -76,6 +76,7 @@ export const AuthContextProvider = (props) => {
   useEffect(() => {
     if (tokenData) {
       logoutTimer = setTimeout(logoutHandler, tokenData.duration)
+      console.log(tokenData.duration)
     }
   }, [tokenData, logoutHandler])
 
