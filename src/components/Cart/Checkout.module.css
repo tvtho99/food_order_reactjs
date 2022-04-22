@@ -48,8 +48,9 @@
   font: inherit;
   font-weight: bold;
   cursor: pointer;
-  background-color: transparent;
-  border: 1px solid #8a2b06;
+  background-color: #583bb6;
+  border: 1px solid #583bb6;
+  color: #fff;
   padding: 0.5rem 2rem;
   border-radius: 25px;
 }
@@ -65,15 +66,15 @@
 
 .button:hover,
 .button:active {
-  background-color: #5a1a01;
-  border-color: #5a1a01;
+  background-color: #27ae60;
+  border-color: #27ae60;
   color: white;
 }
 
 .button--alt:hover,
 .button--alt:active {
-  background-color: #5a1a01;
-  border-color: #5a1a01;
+  background-color: #27ae60;
+  border-color: #27ae60;
   color: white;
 }
 

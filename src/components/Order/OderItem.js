@@ -2,25 +2,7 @@ import React from 'react'
 
 import classes from './OrderItem.module.css'
 
-const OderItem = ({ order, orderChange }) => {
-  const deleteOrderHandler = () => {
-    fetch(
-      `https://react-http-requests-f261a-default-rtdb.asia-southeast1.firebasedatabase.app/orders/${order.id}.json`,
-      {
-        method: 'DELETE',
-      }
-    )
-      .then((res) => {
-        orderChange()
-        if (!res.ok) {
-          throw new Error('Something went wrong!')
-        }
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }
-
+const OderItem = ({ order, onShowNotification }) => {
   return (
     <div className={classes.item}>
       <li key={order.id}>
@@ -52,7 +34,9 @@ const OderItem = ({ order, orderChange }) => {
       </li>
       <button
         className={`${classes.button} ${classes.primary} ${classes.delete}`}
-        onClick={deleteOrderHandler}
+        onClick={() => {
+          onShowNotification(order.id)
+        }}
       >
         Delete
       </button>

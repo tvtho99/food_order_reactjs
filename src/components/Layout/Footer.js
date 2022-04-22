@@ -23,7 +23,7 @@ const Footer = () => {
 
         <div className={classes.box}>
           <h3>contact info</h3>
-          <p>+84357793584</p>
+          <p>github</p>
           <p>tvtho99@gmail.com</p>
           <p>Hanoi, Vietnam</p>
         </div>

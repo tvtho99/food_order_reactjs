@@ -154,7 +154,7 @@ const Checkout = (props) => {
         notification
       ) : (
         <form onSubmit={submitFormHandler}>
-          <div style={{ overflowY: 'scroll', maxHeight: 440 }}>
+          <div style={{ overflowY: 'auto', maxHeight: 440 }}>
             <div className={classes['control-group']}>
               <div className={firstNameInputClasses}>
                 <label htmlFor='name'>First Name</label>

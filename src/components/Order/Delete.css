@@ -1,0 +1,86 @@
+.modal-content {
+  padding: 20px;
+  border-radius: 5px;
+  border: none;
+  text-align: center;
+  font-size: 1.2rem;
+}
+.modal-content .modal-header {
+  border-bottom: none;
+  position: relative;
+}
+.modal-content h4 {
+  text-align: center;
+  font-size: 2rem;
+  margin: 2rem 0;
+}
+.modal-content .close {
+  position: absolute;
+  top: -5px;
+  right: -2px;
+  font-size: 2rem;
+  color: #999;
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+}
+.modal-content .modal-body {
+  color: #666;
+}
+.modal-content .modal-footer {
+  border: none;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 13px;
+  padding: 10px 15px 25px;
+}
+.modal-content .modal-footer a {
+  color: #999;
+}
+.modal-content .icon-box {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+  border-radius: 50%;
+  z-index: 9;
+  text-align: center;
+  border: 3px solid #f15e5e;
+}
+.modal-content .icon-box i {
+  color: #f15e5e;
+  font-size: 46px;
+  display: inline-block;
+  margin-top: 13px;
+}
+.modal-content .btn,
+.modal-content .btn:active {
+  color: #fff;
+  border-radius: 4px;
+  background: #60c7c1;
+  text-decoration: none;
+  transition: all 0.4s;
+  line-height: normal;
+  min-width: 120px;
+  border: none;
+  min-height: 40px;
+  border-radius: 3px;
+  margin: 2rem 0.4rem 0 0.4rem;
+}
+.modal-content .btn-secondary {
+  background: #c1c1c1;
+}
+.modal-content .btn-secondary:hover,
+.modal-content .btn-secondary:focus {
+  background: #a8a8a8;
+}
+.modal-content .btn-danger {
+  background: #f15e5e;
+}
+.modal-content .btn-danger:hover,
+.modal-content .btn-danger:focus {
+  background: #ee3535;
+}
+.trigger-btn {
+  display: inline-block;
+  margin: 100px auto;
+}

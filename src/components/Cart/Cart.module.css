@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
   max-height: 20rem;
-  overflow-y: scroll;
+  overflow: auto;
 }
 
 .total {
@@ -23,7 +23,7 @@
   font: inherit;
   cursor: pointer;
   background-color: transparent;
-  border: 1px solid #8a2b06;
+  border: 1px solid #192a56;
   padding: 0.5rem 2rem;
   border-radius: 25px;
   margin-left: 1rem;
@@ -31,23 +31,31 @@
 
 .actions button:hover,
 .actions button:active {
-  background-color: #5a1a01;
-  border-color: #5a1a01;
+  background-color: #192a56;
+  border-color: #192a56;
   color: white;
 }
 
 .actions .button--alt {
-  color: #8a2b06;
+  color: #666;
   font: inherit;
   font-weight: bold;
   cursor: pointer;
   background-color: transparent;
-  border: 1px solid #8a2b06;
+  border: 1px solid #000;
   padding: 0.5rem 2rem;
   border-radius: 25px;
 }
 
 .actions .button {
-  background-color: #8a2b06;
+  background-color: #583bb6;
+  border-color: #583bb6;
+  color: white;
+  transition: all 0.3s ease-in-out;
+}
+
+.actions .button:hover {
+  background-color: #27ae60;
+  border-color: #27ae60;
   color: white;
 }
