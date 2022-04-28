@@ -1,11 +1,10 @@
 import { useState, useCallback, useEffect } from 'react'
 
-import Card from '../UI/Card'
-import MealItem from './MealItem/MealItem'
-import classes from './AvailableMeals.module.css'
+import Dish from './MealItem/Dish'
 import LoadingSpinner from '../UI/LoadingSpinner'
+import classes from './AvailableDishes.module.css'
 
-const AvailableMeals = () => {
+const AvailableDishes = () => {
   const [meals, setMeals] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -26,7 +25,7 @@ const AvailableMeals = () => {
       }))
 
       const mealItemList = mealsList.map((meal) => (
-        <MealItem
+        <Dish
           key={meal.id}
           id={meal.id}
           name={meal.name}
@@ -49,22 +48,22 @@ const AvailableMeals = () => {
 
   if (isLoading) {
     return (
-      <div className={classes.MealsLoading}>
+      <div className={classes.DishesLoading}>
         <LoadingSpinner />
       </div>
     )
   }
   if (error) {
-    return <div className={classes.MealsError}>{error}</div>
+    return <div className={classes.DishesError}>{error}</div>
   }
 
   return (
-    <section className={classes.meals}>
-      <Card>
-        <ul>{meals}</ul>
-      </Card>
+    <section className={classes.dishes} id='dishes'>
+      <h1 className={classes.heading}>Today's Choices</h1>
+
+      <div className={classes['box-container']}>{meals}</div>
     </section>
   )
 }
 
-export default AvailableMeals
+export default AvailableDishes

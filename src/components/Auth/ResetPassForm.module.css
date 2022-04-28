@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 
 .wave {
   position: fixed;
@@ -49,10 +50,16 @@
 }
 
 .login-content h2 {
+  font-family: 'Caveat', cursive;
   margin: 15px 0;
   color: #333;
-  text-transform: uppercase;
   font-size: 2.9rem;
+}
+
+.login-content h3 {
+  margin: 1.2rem 0;
+  color: #333;
+  font-size: 1.7rem;
 }
 
 .login-content .input-div {
@@ -144,15 +151,6 @@
 
 .input-div.pass {
   margin-bottom: 4px;
-}
-
-.container a {
-  display: block;
-  text-align: right;
-  text-decoration: none;
-  color: #999;
-  font-size: 0.9rem;
-  transition: 0.3s;
 }
 
 .container a:hover {

@@ -12,6 +12,17 @@
   color: #363636;
 }
 
+.item-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-info img {
+  height: 5rem;
+  margin-right: 1rem;
+}
+
 .summary {
   width: 10rem;
   display: flex;

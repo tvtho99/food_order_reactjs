@@ -1,13 +1,13 @@
 import React from 'react'
 
-import AvailableMeals from './AvailableMeals'
+import AvailableDishes from './AvailableDishes'
 import MealsSummary from './MealsSummary'
 
 const Meals = () => {
   return (
     <>
       <MealsSummary />
-      <AvailableMeals />
+      <AvailableDishes />
     </>
   )
 }

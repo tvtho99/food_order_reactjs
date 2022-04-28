@@ -1,8 +1,7 @@
-import { useState, useRef, useContext } from 'react'
+import { useState, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import wave from '../../assets/wave.png'
-import bg from '../../assets/meals.jpg'
 import avatar from '../../assets/avatar.svg'
 import classes from './AuthForm.module.css'
 import AuthContext from '../../store/auth-context'
@@ -11,8 +10,11 @@ import { Link } from 'react-router-dom'
 const AuthForm = () => {
   const history = useHistory()
 
-  const emailInputRef = useRef()
-  const passwordInputRef = useRef()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const [showEmail, setShowEmail] = useState(true)
+  const [showPassword, setShowPassword] = useState(true)
 
   const authContext = useContext(AuthContext)
 
@@ -33,8 +35,8 @@ const AuthForm = () => {
   const submitFormHandler = (event) => {
     event.preventDefault()
 
-    const enteredEmail = emailInputRef.current.value
-    const enteredPassword = passwordInputRef.current.value
+    const enteredEmail = email
+    const enteredPassword = password
 
     //optional: Add validation here
 
@@ -90,16 +92,24 @@ const AuthForm = () => {
 
   const emailFocusHandler = () => {
     setEmailClasses(`${classes['input-div']} ${classes.one} ${classes.focus}`)
+    setShowEmail(true)
   }
   const emailBlurHandler = () => {
     setEmailClasses(`${classes['input-div']} ${classes.one}`)
+    if (email) {
+      setShowEmail(false)
+    }
   }
 
   const passFocusHandler = () => {
     setPassClasses(`${classes['input-div']} ${classes.pass} ${classes.focus}`)
+    setShowPassword(true)
   }
   const passBlurHandler = () => {
     setPassClasses(`${classes['input-div']} ${classes.pass}`)
+    if (password) {
+      setShowPassword(false)
+    }
   }
 
   return (
@@ -116,14 +126,15 @@ const AuthForm = () => {
                 <i className='fas fa-user'></i>
               </div>
               <div className={classes.div}>
-                <h5>Email</h5>
+                {showEmail && <h5>Email</h5>}
                 <input
                   type='email'
                   id='email'
                   className={classes.input}
-                  ref={emailInputRef}
                   onFocus={emailFocusHandler}
                   onBlur={emailBlurHandler}
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
                 />
               </div>
             </div>
@@ -132,14 +143,15 @@ const AuthForm = () => {
                 <i className='fas fa-lock'></i>
               </div>
               <div className={classes.div}>
-                <h5>Password</h5>
+                {showPassword && <h5>Password</h5>}
                 <input
                   type='password'
                   id='password'
                   className={classes.input}
-                  ref={passwordInputRef}
                   onFocus={passFocusHandler}
                   onBlur={passBlurHandler}
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
                 />
               </div>
             </div>
@@ -157,10 +169,10 @@ const AuthForm = () => {
                   paddingBottom: 10,
                 }}
               >
-                Sending request...
+                Logging in...
               </p>
             )}
-            <Link to='/auth/resetPassword'>Forgot Password?</Link>
+            <Link to='/auth/reset-password'>Forgot Password?</Link>
             <button
               type='button'
               className={classes.toggle}

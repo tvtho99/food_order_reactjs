@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react'
+import { Prompt } from 'react-router-dom'
 
 import CartContext from '../../store/cart-context'
 import Modal from '../UI/Modal'
@@ -8,6 +9,7 @@ import classes from './Cart.module.css'
 
 const Cart = (props) => {
   const [showOderForm, setShowOderForm] = useState(false)
+
   const cartContext = useContext(CartContext)
 
   const totalPrice = `$${cartContext.totalPrice.toFixed(2)}`
@@ -29,6 +31,7 @@ const Cart = (props) => {
           name={item.name}
           amount={item.amount}
           price={item.price}
+          image={item.image}
           onAdd={cartItemAddHandler.bind(null, item)}
           onRemove={cartItemRemoveHandler.bind(null, item.id)}
         />

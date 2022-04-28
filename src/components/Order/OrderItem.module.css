@@ -1,7 +1,4 @@
 .item {
-  padding-bottom: 2rem;
-  border-bottom: 1px solid #000;
-  margin-bottom: 1.5rem;
 }
 
 .item h3 {
@@ -27,6 +24,7 @@
   font-weight: 400;
   display: inline-block;
   color: #fff;
+  border: none;
   border-radius: 0.25em;
   text-shadow: -1px -1px 0px rgba(0, 0, 0, 0.4);
 }

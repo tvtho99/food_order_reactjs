@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext, useCallback } from 'react'
 import { Link } from 'react-router-dom'
+import { Store } from 'react-notifications-component'
 
 import AuthContext from '../../store/auth-context'
 import Card from '../../components/UI/Card'
@@ -7,7 +8,6 @@ import LoadingSpinner from '../../components/UI/LoadingSpinner'
 import Dialog from '../UI/Dialog'
 import OrderItem from './OderItem'
 import classes from './OrderList.module.css'
-import './Delete.css'
 
 const OderList = () => {
   const authContext = useContext(AuthContext)
@@ -62,10 +62,36 @@ const OderList = () => {
         if (!res.ok) {
           throw new Error('Something went wrong!')
         }
+        Store.addNotification({
+          title: 'Successfully!',
+          message: 'Delete order successfully!',
+          type: 'success',
+          insert: 'top',
+          container: 'top-right',
+          animationIn: ['animate__animated', 'animate__bounceIn'],
+          animationOut: ['animate__animated', 'animate__bounceOut'],
+          dismiss: {
+            duration: 3000,
+            onScreen: true,
+          },
+        })
         setIsOrderChanged((prev) => !prev)
       })
       .catch((error) => {
-        console.log(error)
+        Store.addNotification({
+          title: 'Failed!',
+          message: error.message,
+          type: 'danger',
+          insert: 'top',
+          container: 'top-right',
+          animationIn: ['animate__animated', 'animate__bounceIn'],
+          animationOut: ['animate__animated', 'animate__bounceOut'],
+          dismiss: {
+            duration: 5000,
+            onScreen: true,
+            pauseOnHover: true,
+          },
+        })
       })
   }
 
@@ -120,31 +146,35 @@ const OderList = () => {
     <Card>
       {showDialog && (
         <Dialog onClose={closeDialogHandler}>
-          <div className='modal-content'>
-            <div className='modal-header flex-column'>
-              <div className='icon-box'>
+          <div className={classes['modal-content']}>
+            <div
+              className={`${classes['modal-header']} ${classes['flex-column']}`}
+            >
+              <div className={classes['icon-box']}>
                 <i className='fa-solid fa-trash-can'></i>
               </div>
-              <h4 className='modal-title'>Are you sure?</h4>
-              <button onClick={closeDialogHandler} className='close'>
+              <h4 className={classes['modal-title']}>Are you sure?</h4>
+              <button onClick={closeDialogHandler} className={classes.close}>
                 <i className='fa-solid fa-xmark'></i>
               </button>
             </div>
-            <div className='modal-body'>
+            <div className={classes['modal-body']}>
               <p>
                 Do you really want to delete this order? <br /> This process
                 cannot be undone.
               </p>
             </div>
-            <div className='modal-footer justify-content-center'>
+            <div
+              className={`${classes['modal-footer']} ${classes['justify-content-center']}`}
+            >
               <button
-                className='btn btn-secondary'
+                className={`${classes.btn} ${classes['btn-secondary']}`}
                 onClick={closeDialogHandler}
               >
                 Cancel
               </button>
               <button
-                className='btn btn-danger'
+                className={`${classes.btn} ${classes['btn-danger']}`}
                 onClick={() => {
                   deleteOrderHandler(orderDeleteId)
                   setShowDialog(false)

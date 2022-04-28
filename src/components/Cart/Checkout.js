@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react'
+import { Store } from 'react-notifications-component'
 
 import useInput from '../../hooks/use-input'
 import AuthContext from '../../store/auth-context'
@@ -7,8 +8,6 @@ import LoadingSpinner from '../UI/LoadingSpinner'
 import classes from './Checkout.module.css'
 
 const Checkout = (props) => {
-  const [error, setError] = useState(null)
-  const [placeOrder, setPlaceOrder] = useState(false)
   const [loading, setLoading] = useState(false)
 
   // get cart context
@@ -61,7 +60,8 @@ const Checkout = (props) => {
     enteredFirstNameIsValid &&
     enteredLastNameIsValid &&
     enteredAddressIsValid &&
-    enteredPhonenumberIsValid
+    enteredPhonenumberIsValid &&
+    cartContext.items.length > 0
   ) {
     formIsValid = true
   }
@@ -89,9 +89,38 @@ const Checkout = (props) => {
         throw new Error('Somthing went wrong!')
       }
       setLoading(false)
+      props.onHideCart()
+
+      Store.addNotification({
+        title: 'Successfully!',
+        message: 'Your order has been sent successfully!',
+        type: 'success',
+        insert: 'top',
+        container: 'top-right',
+        animationIn: ['animate__animated', 'animate__bounceIn'],
+        animationOut: ['animate__animated', 'animate__bounceOut'],
+        dismiss: {
+          duration: 3000,
+          onScreen: true,
+        },
+      })
     } catch (error) {
       setLoading(false)
-      setError(error.message)
+
+      Store.addNotification({
+        title: 'Failed!',
+        message: error.message,
+        type: 'danger',
+        insert: 'top',
+        container: 'top-right',
+        animationIn: ['animate__animated', 'animate__bounceIn'],
+        animationOut: ['animate__animated', 'animate__bounceOut'],
+        dismiss: {
+          duration: 5000,
+          onScreen: true,
+          pauseOnHover: true,
+        },
+      })
     }
   }
 
@@ -100,9 +129,7 @@ const Checkout = (props) => {
     if (!formIsValid) {
       return
     }
-
     submitOrder()
-    setPlaceOrder(true)
 
     cartContext.clearCart()
   }
@@ -120,26 +147,6 @@ const Checkout = (props) => {
     ? `${classes['form-control']} ${classes.invalid}`
     : classes['form-control']
 
-  let notification
-
-  if (error) {
-    notification = error
-  } else {
-    notification = (
-      <>
-        <div className={classes['success-msg']}>
-          <i className='fa fa-check'></i>
-          Successfully sent the order!
-        </div>
-        <div className={classes['form-actions']}>
-          <button className={classes['button--alt']} onClick={props.onHideCart}>
-            Close
-          </button>
-        </div>
-      </>
-    )
-  }
-
   if (loading) {
     return (
       <div style={{ textAlign: 'center' }}>
@@ -150,90 +157,84 @@ const Checkout = (props) => {
 
   return (
     <>
-      {placeOrder ? (
-        notification
-      ) : (
-        <form onSubmit={submitFormHandler}>
-          <div style={{ overflowY: 'auto', maxHeight: 440 }}>
-            <div className={classes['control-group']}>
-              <div className={firstNameInputClasses}>
-                <label htmlFor='name'>First Name</label>
-                <input
-                  type='text'
-                  id='name'
-                  value={enteredFirstName}
-                  onChange={firstNameChangeHandler}
-                  onBlur={firstNameBlurHandler}
-                />
-                {firstNameInputHasError && (
-                  <p className={classes['error-text']}>
-                    First Name must not be empty!
-                  </p>
-                )}
-              </div>
-              <div className={lastNameInputClasses}>
-                <label htmlFor='name'>Last Name</label>
-                <input
-                  type='text'
-                  id='name'
-                  value={enteredLastName}
-                  onChange={lastNameChangeHandler}
-                  onBlur={lastNameBlurHandler}
-                />
-                {lastNameInputHasError && (
-                  <p className={classes['error-text']}>
-                    Last Name must not be empty!
-                  </p>
-                )}
-              </div>
-            </div>
-            <div className={classes['control-group']}>
-              <div className={phonenumberInputClasses}>
-                <label htmlFor='phonenumber'>Phone Number</label>
-                <input
-                  type='text'
-                  id='phonenumber'
-                  value={enteredPhonenumber}
-                  onChange={phonenumberChangeHandler}
-                  onBlur={phonenumberBlurHandler}
-                />
-                {phonenumberInputHasError && (
-                  <p className={classes['error-text']}>
-                    Phone number must be entered!
-                  </p>
-                )}
-              </div>
-            </div>
-            <div className={addressInputClasses}>
-              <label htmlFor='address'>Address</label>
+      <form onSubmit={submitFormHandler}>
+        <div style={{ overflowY: 'auto', maxHeight: 440 }}>
+          <div className={classes['control-group']}>
+            <div className={firstNameInputClasses}>
+              <label htmlFor='name'>First Name</label>
               <input
                 type='text'
-                id='address'
-                value={enteredAddress}
-                onChange={addressChangeHandler}
-                onBlur={addressBlurHandler}
+                id='name'
+                value={enteredFirstName}
+                onChange={firstNameChangeHandler}
+                onBlur={firstNameBlurHandler}
               />
-              {addressInputHasError && (
+              {firstNameInputHasError && (
                 <p className={classes['error-text']}>
-                  Adress must not be empty!
+                  First Name must not be empty!
                 </p>
               )}
             </div>
-            <div className={classes['order-details']}>
-              <h3>Order Details:</h3>
-              <div>{cartItems}</div>
-              <h3>
-                Total Price: <span>{totalPrice}</span>
-              </h3>
+            <div className={lastNameInputClasses}>
+              <label htmlFor='name'>Last Name</label>
+              <input
+                type='text'
+                id='name'
+                value={enteredLastName}
+                onChange={lastNameChangeHandler}
+                onBlur={lastNameBlurHandler}
+              />
+              {lastNameInputHasError && (
+                <p className={classes['error-text']}>
+                  Last Name must not be empty!
+                </p>
+              )}
             </div>
           </div>
-          <div className={classes['form-actions']}>
-            <button className={classes.button} disabled={!formIsValid}>
-              SUBMIT
-            </button>
+          <div className={classes['control-group']}>
+            <div className={phonenumberInputClasses}>
+              <label htmlFor='phonenumber'>Phone Number</label>
+              <input
+                type='text'
+                id='phonenumber'
+                value={enteredPhonenumber}
+                onChange={phonenumberChangeHandler}
+                onBlur={phonenumberBlurHandler}
+              />
+              {phonenumberInputHasError && (
+                <p className={classes['error-text']}>
+                  Phone number must be entered!
+                </p>
+              )}
+            </div>
           </div>
-        </form>
-      )}
+          <div className={addressInputClasses}>
+            <label htmlFor='address'>Address</label>
+            <input
+              type='text'
+              id='address'
+              value={enteredAddress}
+              onChange={addressChangeHandler}
+              onBlur={addressBlurHandler}
+            />
+            {addressInputHasError && (
+              <p className={classes['error-text']}>Adress must not be empty!</p>
+            )}
+          </div>
+          <div className={classes['order-details']}>
+            <h3>Order Details:</h3>
+            <div>{cartItems}</div>
+            <h3>
+              Total Price: <span>{totalPrice}</span>
+            </h3>
+          </div>
+        </div>
+        <div className={classes['form-actions']}>
+          <button className={classes.button} disabled={!formIsValid}>
+            SUBMIT
+          </button>
+        </div>
+      </form>
     </>
   )
 }
