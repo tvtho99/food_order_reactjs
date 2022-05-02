@@ -74,6 +74,7 @@ const Checkout = (props) => {
         {
           method: 'POST',
           body: JSON.stringify({
+            status: 'pending',
             firstName: enteredFirstName,
             lastName: enteredLastName,
             email: authContext.email,
@@ -207,20 +208,23 @@ const Checkout = (props) => {
                 </p>
               )}
             </div>
+            <div className={addressInputClasses}>
+              <label htmlFor='address'>Address</label>
+              <input
+                type='text'
+                id='address'
+                value={enteredAddress}
+                onChange={addressChangeHandler}
+                onBlur={addressBlurHandler}
+              />
+              {addressInputHasError && (
+                <p className={classes['error-text']}>
+                  Adress must not be empty!
+                </p>
+              )}
+            </div>
           </div>
-          <div className={addressInputClasses}>
-            <label htmlFor='address'>Address</label>
-            <input
-              type='text'
-              id='address'
-              value={enteredAddress}
-              onChange={addressChangeHandler}
-              onBlur={addressBlurHandler}
-            />
-            {addressInputHasError && (
-              <p className={classes['error-text']}>Adress must not be empty!</p>
-            )}
-          </div>
+
           <div className={classes['order-details']}>
             <h3>Order Details:</h3>
             <div>{cartItems}</div>

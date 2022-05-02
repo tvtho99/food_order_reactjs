@@ -1,8 +1,17 @@
-.item {
-}
-
 .item h3 {
   margin-top: 0.5rem;
+}
+
+.pending {
+  color: #f5b041;
+}
+
+.approved {
+  color: #27ae60;
+}
+
+.canceled {
+  color: #e74c3c;
 }
 
 .item li {

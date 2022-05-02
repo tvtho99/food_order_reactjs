@@ -7,13 +7,14 @@ import Header from './components/Layout/Header'
 import Footer from './components/Layout/Footer'
 import Meals from './components/Meals/Meals'
 import Cart from './components/Cart/Cart'
-import Navbar from './components/Layout/Navbar'
 import AuthForm from './components/Auth/AuthForm'
 import ResetPassForm from './components/Auth/ResetPassForm'
 
 import Orders from './pages/Oders'
 import Profile from './pages/Profile'
 import NotFound from './pages/NotFound/NotFound'
+import About from './pages/About'
+import Contact from './pages/Contact'
 
 import { CartProvider } from './store/cart-context'
 import AuthContext from './store/auth-context'
@@ -35,8 +36,6 @@ function App() {
       hideCartHandler()
     } else setCartIsShown(true)
   }
-
-  console.log(cartIsShown)
 
   return (
     <CartProvider>
@@ -74,16 +73,26 @@ function App() {
         </Route>
 
         <Route path='/orders' exact>
-          <Navbar />
+          <Header onShowCart={showCartHandler} />
           {authContext.isLoggedIn ? <Orders /> : <Redirect to='/auth' />}
           <Footer />
         </Route>
 
         <Route path='/profile' exact>
-          <Navbar />
+          <Header onShowCart={showCartHandler} />
           {authContext.isLoggedIn ? <Profile /> : <Redirect to='/auth' />}
           <Footer />
         </Route>
+
+        {/* <Route path='/about' exact>
+          <Header onShowCart={showCartHandler} />
+          <About />
+        </Route>
+
+        <Route path='/contact' exact>
+          <Header onShowCart={showCartHandler} />
+          <Contact />
+        </Route> */}
 
         <Route path='*'>
           <NotFound />

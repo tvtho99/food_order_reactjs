@@ -1,6 +1,9 @@
 import { useState, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
+import { signInWithPopup } from 'firebase/auth'
+import GoogleButton from 'react-google-button'
 
+import { auth, provider } from '../../firebase'
 import wave from '../../assets/wave.png'
 import avatar from '../../assets/avatar.svg'
 import classes from './AuthForm.module.css'
@@ -80,6 +83,7 @@ const AuthForm = () => {
         authContext.login(
           data.idToken,
           data.email,
+          data.displayName,
           expirationTime.toLocaleString()
         )
 
@@ -180,6 +184,33 @@ const AuthForm = () => {
             >
               {isLogin ? 'Create new account' : 'Login with existing account'}
             </button>
+            <div className={classes['google-btn']}>
+              <GoogleButton
+                onClick={() => {
+                  console.log('google')
+                  signInWithPopup(auth, provider)
+                    .then((result) => {
+                      console.log(result)
+                      const user = result.user
+                      const expirationTime = new Date(
+                        new Date().getTime() +
+                          +user.stsTokenManager.expirationTime
+                      )
+                      authContext.login(
+                        user.accessToken,
+                        user.email,
+                        user.displayName,
+                        expirationTime.toLocaleString()
+                      )
+
+                      history.replace('/')
+                    })
+                    .catch((err) => {
+                      console.log(err)
+                    })
+                }}
+              />
+            </div>
           </form>
         </div>
       </div>

@@ -1,5 +1,4 @@
 import { useContext, useState } from 'react'
-import { Prompt } from 'react-router-dom'
 
 import CartContext from '../../store/cart-context'
 import Modal from '../UI/Modal'

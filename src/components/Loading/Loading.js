@@ -9,13 +9,11 @@ const Loading = () => {
   )
 
   const hideLoaderHandler = () => {
-    console.log('hideLoaderHandler')
     document.title = 'What2Eat'
     setLoaderClasses(`${classes['loader-container']} ${classes['fade-out']}`)
   }
 
   window.onload = () => {
-    console.log('window.onload')
     document.title = 'Loading...'
     setTimeout(hideLoaderHandler, 3000)
   }

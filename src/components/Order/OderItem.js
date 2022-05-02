@@ -4,10 +4,27 @@ import Card from '../UI/Card'
 import classes from './OrderItem.module.css'
 
 const OderItem = ({ order, onShowNotification }) => {
+  let statusClasses
+  switch (order.status) {
+    case 'pending':
+      statusClasses = classes.pending
+      break
+    case 'approved':
+      statusClasses = classes.approved
+      break
+    case 'canceled':
+      statusClasses = classes.canceled
+      break
+    default:
+      statusClasses = classes.pending
+      break
+  }
+
   return (
     <Card styles={{ margin: '2rem' }}>
       <div className={classes.item}>
         <li key={order.id}>
+          <h3 className={statusClasses}>Status: {order.status}</h3>
           <h3>
             Fullname:{' '}
             <span className={classes.info}>

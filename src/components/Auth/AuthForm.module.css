@@ -182,9 +182,18 @@
 
 .toggle {
   border: none;
-  text-decoration: underline;
+  text-decoration: none;
   cursor: pointer;
   font-size: 1rem;
+  color: #4727ad;
+}
+
+.google-btn {
+  display: flex;
+  justify-content: center;
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+  border-top: 1px solid rgb(138, 131, 131);
 }
 
 @media screen and (max-width: 1050px) {

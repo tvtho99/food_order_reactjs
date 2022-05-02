@@ -30,15 +30,23 @@ const UserAction = () => {
           showMenu ? `${classes.active} ${classes.menu}` : classes.menu
         }
       >
-        <p>{authContext.email}</p>
+        <p>
+          {authContext.displayName
+            ? authContext.displayName
+            : authContext.email}
+        </p>
         <ul>
           <li>
             <img src={edit} alt='edit' />
-            <Link to='/profile'>Edit Profile</Link>
+            <Link onClick={toggleMenuHandler} to='/profile'>
+              Edit Profile
+            </Link>
           </li>
           <li>
             <img src={bag} alt='bag' />
-            <Link to='/orders'>Orders</Link>
+            <Link onClick={toggleMenuHandler} to='/orders'>
+              Orders
+            </Link>
           </li>
           <li>
             <img src={logout} alt='logout' />
