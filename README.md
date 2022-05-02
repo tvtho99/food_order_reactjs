@@ -1,5 +1,5 @@
 # Deployed At: https://react-food-order-app-deploy.web.app/
-```diff !Note: Some features got crashed when deployed ```
+```!Note: Some features got crashed when deployed ```
 
 # Getting Started with Create React App
 
